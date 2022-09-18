@@ -1,0 +1,18 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./conversionLibrary.sol";
+
+contract demo{
+
+    using conversion for uint256;
+
+    function toEth(uint256 usd) public view returns(uint256, uint256){
+        (uint256 integralPart, uint256 decimalPart) = usd.usdToEth();
+        return (integralPart, decimalPart);
+    }
+    function toUsd(uint256 eth) public view returns(uint256){
+        uint256 price = eth.getCurrentPrice();
+        return (price*eth);
+    }
+}
